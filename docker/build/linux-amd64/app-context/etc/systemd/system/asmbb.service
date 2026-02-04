@@ -1,0 +1,13 @@
+[Unit]
+Description=AsmBB forum engine FastCGI script.
+After=nginx.service
+
+[Service]
+Type=simple
+User=NON_ROOT
+WorkingDirectory=/asmbb
+ExecStart=/asmbb/engine
+Restart=on-failure
+
+[Install]
+WantedBy=nginx.service
