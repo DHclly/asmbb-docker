@@ -16,3 +16,19 @@ docker build --platform linux/amd64 --pull=false --tag asmbb:v3.0.0-amd64 --file
 ```bash
 docker run --name=asmbb --publish 8080:80 -d asmbb:v3.0.0-amd64
 ```
+
+## 最新 docker 镜像
+
+由于不知道的原因，底层的 ./engine 程序会突然挂掉，因此加了检测和重启机制。
+
+```bash
+docker pull dhclly/asmbb:20260304A2-v3.0.0-amd64
+```
+
+在首次启动后，可以把容器里面的 `/asmbb/board.sqlite` 文件拷贝到物理机上，然后映射进去，避免数据库数据丢失
+
+```bash
+docker run --name=asmbb --publish 8080:80 --detach \
+-v /data/asmbb/board.sqlite:/asmbb/board.sqlite \
+dhclly/asmbb:20260304A2-v3.0.0-amd64
+```
